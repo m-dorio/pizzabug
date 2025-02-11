@@ -6,8 +6,25 @@ type UserRole = "guest" | "member" | "admin" | "contributor"
 
 // usage
 //let userRole: UserRole = "admin" //type UserRole = "guest" | "member" | "admin"
-// let userRole = "xxxzxzxzxz" //"xxxzxzxzxz": Unknown word
+// let userRole = "xxxzxzxzxz" //Unknown word
 // let userRole: UserRole = "member"
+
+// PARTIAL TYPE is a utility type, similar to C# getComponents<####>()
+type updatedUser = Partial<User>
+// If hover: (instead of typing it manually)
+// type updatedUser = {
+//     id?: number | undefined;
+//     username?: string | undefined;
+//     role?: UserRole | undefined;
+// }
+
+
+// samples: making it optional, but this is not the best way to do it.
+// type updatedUser = {
+//     id?: number
+//     username?: string
+//     role?: UserRole = "guest" | "member" | "admin" | "contributor"
+// }
 
 // UNIONS or enums
 type User = {
@@ -48,3 +65,4 @@ updateUser(4, {
 });
 
 console.log(users);
+
