@@ -49,15 +49,20 @@ function completeOrder(orderId: number) {
     return order
 }
 
-export function getPizzaDetail(identifier: string | number) {
+export function getPizzaDetail(identifier: string | number): Pizza | undefined { //added union : Pizza | undefined
     // const identify = menu.find(item => item.id === identifier || item.name === identifier); 
     if (typeof identifier === "string") {
         return menu.find(pizza => pizza.name.toLowerCase() === identifier.toLowerCase());
+        //Type 'Pizza | undefined' is not assignable to type 'Pizza'.
+        //Type 'undefined' is not assignable to type 'Pizza'.
     } else if (typeof identifier === "number") {
         return menu.find(pizza => pizza.id === identifier)
+        //Type 'Pizza | undefined' is not assignable to type 'Pizza'.
+        //Type 'undefined' is not assignable to type 'Pizza'.
     } else {
         throw new TypeError("Parameter `Identifier` must be either a string or a number");
     }
+
 }
 
 addNewPizza({ id: 4, name: "Chicken Bacon Ranch", price: 12 })
