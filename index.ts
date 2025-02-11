@@ -16,15 +16,16 @@ const menu = [
     { name: "Veggie", price: 9 },
 ];
 
+
 let cashInRegister = 100;
 let nextOrderId = 1;
-const orderQueue:Order[] = []
+const orderHistory: Order[] = []
 
-function addNewPizza(pizzaObj:Pizza) {
+function addNewPizza(pizzaObj: Pizza) {
     menu.push(pizzaObj);
 }
 
-function placeOrder(pizzaName:string) {
+function placeOrder(pizzaName: string) {
     const selectedPizza = menu.find(pizzaObj => pizzaObj.name === pizzaName);
     if (selectedPizza === undefined) {
         console.error(`${pizzaName} does not exist in the menu.`);
@@ -32,14 +33,15 @@ function placeOrder(pizzaName:string) {
     }
     cashInRegister += selectedPizza.price
     const newOrder = { id: nextOrderId++, pizza: selectedPizza, status: "ordered" }
-    orderQueue.push(newOrder);
+    orderHistory.push(newOrder);
     return newOrder;
 }
 
 function completeOrder(orderId: number) {
-    const order = orderQueue.find(order => order.id === orderId)
+    const order = orderHistory.find(order => order.id === orderId)
     if (order === undefined) {
-        console.error(`${order} does not exist in the menu.`);
+        console.error(`${orderId} does not exist in the menu.`);
+        // throw new Error();
         return;
     }
     order.status = "completed"
@@ -55,4 +57,4 @@ completeOrder(1);
 
 console.log("Menu:", menu)
 console.log("Cash in register:", cashInRegister)
-console.log("Order queue:", orderQueue)
+console.log("Order queue:", orderHistory)
