@@ -11,10 +11,10 @@ type Order = {
 }
 
 const menu: Pizza[] = [
-    { id:1, name: "Margherita", price: 8 },
-    { id:2, name: "Pepperoni", price: 10 },
-    { id:3, name: "Hawaiian", price: 10 },
-    { id:4, name: "Veggie", price: 9 },
+    { id: 1, name: "Margherita", price: 8 },
+    { id: 2, name: "Pepperoni", price: 10 },
+    { id: 3, name: "Hawaiian", price: 10 },
+    { id: 4, name: "Veggie", price: 9 },
 ];
 
 
@@ -49,18 +49,20 @@ function completeOrder(orderId: number) {
     return order
 }
 
-function getPizzaDetail(identifier: string | number) {
+export function getPizzaDetail(identifier: string | number) {
     // const identify = menu.find(item => item.id === identifier || item.name === identifier); 
     if (typeof identifier === "string") {
         return menu.find(pizza => pizza.name.toLowerCase() === identifier.toLowerCase());
+    } else if (typeof identifier === "number") {
+        return menu.find(pizza => pizza.id === identifier)
     } else {
-        return menu.find(pizza=> pizza.id === identifier)
+        throw new TypeError("Parameter `Identifier` must be either a string or a number");
     }
 }
 
-addNewPizza({id: 4, name: "Chicken Bacon Ranch", price: 12 })
-addNewPizza({id: 5, name: "BBQ Chicken", price: 12 })
-addNewPizza({id: 6, name: "Spicy Sausage", price: 11 })
+addNewPizza({ id: 4, name: "Chicken Bacon Ranch", price: 12 })
+addNewPizza({ id: 5, name: "BBQ Chicken", price: 12 })
+addNewPizza({ id: 6, name: "Spicy Sausage", price: 11 })
 
 placeOrder("Chicken Bacon Ranch");
 completeOrder(1);
@@ -68,3 +70,4 @@ completeOrder(1);
 console.log("Menu:", menu)
 console.log("Cash in register:", cashInRegister)
 console.log("Order queue:", orderHistory)
+console.log(getPizzaDetail(1));
